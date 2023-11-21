@@ -15,7 +15,13 @@
 		"-v",
 		"/var/run/docker.sock:/var/run/docker.sock",
 		"--network",
-		"development"
+		"host",
+		"--gpus",
+		"all",
+		"-e",
+		"ACCEPT_EULA=Y",
+		"-e",
+		"PRIVACY_CONSENT=Y"
 	],
 	"postCreateCommand": "mkdir -p ~/.ssh && cp -r ~/.ssh-localhost/* ~/.ssh && chmod 700 ~/.ssh && chmod 600 ~/.ssh/* && mkdir -p ~/.kube && cp -r ~/.kube-localhost/* ~/.kube",
 	"appPort": [

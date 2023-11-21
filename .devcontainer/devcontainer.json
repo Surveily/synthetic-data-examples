@@ -21,7 +21,7 @@
 		"-e",
 		"ACCEPT_EULA=Y",
 		"-e",
-		"PRIVACY_CONSENT=Y"
+		"PRIVACY_CONSENT=N"
 	],
 	"postCreateCommand": "mkdir -p ~/.ssh && cp -r ~/.ssh-localhost/* ~/.ssh && chmod 700 ~/.ssh && chmod 600 ~/.ssh/* && mkdir -p ~/.kube && cp -r ~/.kube-localhost/* ~/.kube",
 	"appPort": [

@@ -83,11 +83,9 @@ group:
 # Create the writer and initialize
 writer:
   writers.get:
-    name: "BasicWriter"
+    name: "KittiWriter"
     init_params:
-      output_dir: "_output_yaml/TutorialBasicFunctionality/"
-      rgb: True
-      bounding_box_2d_tight: True
+      output_dir: "C:\\Users\\WojciechTurowicz\\Workspace\\synthetic-data-examples\\omni.replicator_yaml\\out\\tutorial_basic_functionality"
 
 writer_attach:
   writer.attach:

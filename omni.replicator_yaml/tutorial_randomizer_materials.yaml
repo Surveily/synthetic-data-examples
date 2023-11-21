@@ -84,10 +84,9 @@ render_product:
 # Create the writer and initialize
 writer:
   writers.get:
-    name: "BasicWriter"
+    name: "KittiWriter"
     init_params:
-      output_dir: "_output_yaml/TutorialRandomizerMaterials/"
-      rgb: True
+      output_dir: "C:\\Users\\WojciechTurowicz\\Workspace\\synthetic-data-examples\\omni.replicator_yaml\\out\\tutorial_randomizer_materials"
 
 writer_attach:
   writer.attach:

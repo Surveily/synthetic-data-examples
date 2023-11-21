@@ -1,1 +1,4 @@
 .vscode/settings.json
+omni.replicator_yaml/out/*/*
+omni.replicator_yaml/*.log
+omni.replicator_yaml/*/*.log

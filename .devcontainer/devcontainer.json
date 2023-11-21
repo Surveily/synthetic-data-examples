@@ -2,14 +2,16 @@
 // documentation about the devcontainer.json format
 {
 	"name": "nvidia.omniverse",
-	"image": "nvcr.io/nvidia/isaac-sim:2023.1.0-hotfix.1",
+	"build": {
+		"dockerfile": "dockerfile"
+	},
 	"runArgs": [
 		"--name",
 		"nvidia.omniverse",
 		"-v",
-		"${env:HOME}${env:USERPROFILE}/.ssh:/home/vscode/.ssh-localhost:ro",
+		"${env:HOME}${env:USERPROFILE}/.ssh:/root/.ssh-localhost:ro",
 		"-v",
-		"${env:HOME}${env:USERPROFILE}/.kube:/home/vscode/.kube-localhost:ro",
+		"${env:HOME}${env:USERPROFILE}/.kube:/root/.kube-localhost:ro",
 		"-v",
 		"/var/run/docker.sock:/var/run/docker.sock",
 		"--network",

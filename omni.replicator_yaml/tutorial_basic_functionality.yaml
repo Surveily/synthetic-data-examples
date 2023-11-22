@@ -85,7 +85,7 @@ writer:
   writers.get:
     name: "KittiWriter"
     init_params:
-      output_dir: "C:\\Users\\WojciechTurowicz\\Workspace\\synthetic-data-examples\\omni.replicator_yaml\\out\\tutorial_basic_functionality"
+      output_dir: "/workspaces/synthetic-data-examples/out/tutorial_basic_functionality"
 
 writer_attach:
   writer.attach:

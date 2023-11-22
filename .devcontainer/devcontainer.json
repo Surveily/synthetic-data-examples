@@ -31,6 +31,7 @@
 		"kosunix.guid",
 		"eamodio.gitlens",
 		"redhat.vscode-yaml",
+		"rogalmic.bash-debug",
 		"mikeburgh.xml-format",
 		"donjayamanne.githistory",
 		"ms-azuretools.vscode-docker",

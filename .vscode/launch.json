@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "bashdb",
+            "request": "launch",
+            "name": "tutorial_basic_functionality",
+            "cwd": "${workspaceFolder}",
+            "program": "run.sh",
+            "args": [
+                "tutorial_basic_functionality"
+            ]
+        }
+    ]
+}

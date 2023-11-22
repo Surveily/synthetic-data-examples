@@ -81,7 +81,7 @@ writer:
   writers.get:
     name: "BasicWriter"
     init_params:
-      output_dir: "_output_yaml/RandomizeCameraPositionsList/"
+      output_dir: "/workspaces/synthetic-data-examples/.out/RandomizeCameraPositionsList"
       rgb: True
       bounding_box_2d_tight: True
     render_products: render_product

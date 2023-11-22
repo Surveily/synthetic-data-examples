@@ -87,7 +87,7 @@ writer:
   writers.get:
     name: "BasicWriter"
     init_params:
-      output_dir: "_output_yaml/MultipleCamerasWithBasicWriter"
+      output_dir: "/workspaces/synthetic-data-examples/.out/MultipleCamerasWithBasicWriter"
       rgb: True
       bounding_box_2d_loose: True
       bounding_box_2d_tight: True

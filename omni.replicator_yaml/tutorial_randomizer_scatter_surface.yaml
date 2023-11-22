@@ -80,7 +80,7 @@ writer:
   writers.get:
     name: "BasicWriter"
     init_params:
-      output_dir: "_output_yaml/TutorialRandomizerScatterSurface/"
+      output_dir: "/workspaces/synthetic-data-examples/.out/TutorialRandomizerScatterSurface"
       rgb: True
 
 writer_attach:

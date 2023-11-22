@@ -72,7 +72,7 @@ writer:
   writers.get:
     name: "BasicWriter"
     init_params:
-      output_dir: "_output_yaml/TutorialRandomizerPose/"
+      output_dir: "/workspaces/synthetic-data-examples/.out/TutorialRandomizerPose"
       rgb: True
 
 writer_attach:

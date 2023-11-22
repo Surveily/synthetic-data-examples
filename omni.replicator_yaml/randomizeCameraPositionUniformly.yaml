@@ -77,7 +77,7 @@ writer:
   writers.get:
     name: "BasicWriter"
     init_params:
-      output_dir: "_output_yaml/RandomizeCameraPositionUniformly/"
+      output_dir: "/workspaces/synthetic-data-examples/.out/RandomizeCameraPositionUniformly"
       rgb: True
       bounding_box_2d_tight: True
     render_products: render_product

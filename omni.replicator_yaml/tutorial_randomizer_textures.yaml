@@ -65,7 +65,7 @@ plane:
 # Create a group of objects with these semantic labels
 shapes:
   get.prims:
-    semantics: [['class', 'cube'], ['class', 'sphere']]
+    semantics: [["class", "cube"], ["class", "sphere"]]
 
 # Create the camera and render product
 camera:
@@ -83,7 +83,7 @@ writer:
   writers.get:
     name: "KittiWriter"
     init_params:
-      output_dir: "C:\\Users\\WojciechTurowicz\\Workspace\\synthetic-data-examples\\omni.replicator_yaml\\out\\tutorial_randomizer_textures"
+      output_dir: "/workspaces/synthetic-data-examples/.out/TutorialRandomizerTextures"
 
 writer_attach:
   writer.attach:

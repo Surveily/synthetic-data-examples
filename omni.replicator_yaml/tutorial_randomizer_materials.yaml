@@ -50,8 +50,8 @@ mats:
   create.material_omnipbr:
     diffuse:
       distribution.uniform:
-          lower: [0, 0, 0]
-          upper: [1, 1, 1]
+        lower: [0, 0, 0]
+        upper: [1, 1, 1]
     count: 100
 
 # Create the objects in the scene
@@ -86,7 +86,7 @@ writer:
   writers.get:
     name: "KittiWriter"
     init_params:
-      output_dir: "C:\\Users\\WojciechTurowicz\\Workspace\\synthetic-data-examples\\omni.replicator_yaml\\out\\tutorial_randomizer_materials"
+      output_dir: "/workspaces/synthetic-data-examples/.out/TutorialRandomizerMaterials"
 
 writer_attach:
   writer.attach:

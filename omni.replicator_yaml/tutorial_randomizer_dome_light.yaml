@@ -60,7 +60,7 @@ writer:
   writers.get:
     name: "BasicWriter"
     init_params:
-      output_dir: "_output_yaml/TutorialRandomizerDomeLight/"
+      output_dir: "/workspaces/synthetic-data-examples/.out/TutorialRandomizerDomeLight"
       rgb: True
     render_products: render_product
 

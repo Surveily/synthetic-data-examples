@@ -15,15 +15,17 @@ stage_up_axis_setting:
 camera:
   create.camera:
     position: [-10, -10, 3]
+    rotation: [0, 0, 0]
 
 render_product:
   create.render_product:
     camera: camera
     resolution: [1280, 720]
 
+# Load the scene
 warehouse:
   create.from_usd:
-    usd: "omniverse://localhost/NVIDIA/Assets/Isaac/2022.2.1/Isaac/Environments/Simple_Warehouse/full_warehouse.usd"
+    usd: "omniverse://localhost/NVIDIA/Assets/Isaac/2023.1.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd"
 
 # Select the objects in the scene
 forklift:
@@ -53,21 +55,24 @@ writer_attach:
 trigger:
   trigger.on_frame:
     max_execs: 50
+    rt_subframes: 3
 
-# When the trigger executes, modify the poses of the group
+# When the trigger executes, run the following logic
 with_trigger:
   with.trigger:
     with.camera:
+      # move the camera around and rotate
       modify.pose:
         position:
           distribution.uniform:
-            lower: [-1, -1, 3]
-            upper: [1, 1, 5]
-        look_at:
+            lower: [-23.6, -3, 2.5]
+            upper: [3.03, 3, 5.0]
+        rotation:
           distribution.uniform:
-            lower: [-15, 5, 1]
-            upper: [10, 10, 2]
+            lower: [0, -30, -120]
+            upper: [0, -10, -60]
 
+    # move the forklift around and rotate
     # with.forklift:
     #   modify.pose:
     #     rotation:
@@ -79,32 +84,36 @@ with_trigger:
     #     no_coll_prims: racks_and_walls
     #     check_for_collisions: True
 
+    # create and scatter cones
     cone_instance:
       randomizer.instantiate:
         paths:
           [
-            "omniverse://localhost/NVIDIA/Assets/Isaac/2022.2.1/Isaac/Environments/Simple_Warehouse/Props/S_TrafficCone.usd",
+            "omniverse://localhost/NVIDIA/Assets/Isaac/2023.1.0/Isaac/Environments/Simple_Warehouse/Props/S_TrafficCone.usd",
           ]
         size: 50
         mode: "point_instance"
 
     with.cone_instance:
       randomizer.scatter_2d:
+        seed: 0
         surface_prims: floor
         no_coll_prims: racks_and_walls
         check_for_collisions: True
 
+    # create and scatter wet floor signs
     wet_floor_sign_instance:
       randomizer.instantiate:
         paths:
           [
-            "omniverse://localhost/NVIDIA/Assets/Isaac/2022.2.1/Isaac/Environments/Simple_Warehouse/Props/S_WetFloorSign.usd",
+            "omniverse://localhost/NVIDIA/Assets/Isaac/2023.1.0/Isaac/Environments/Simple_Warehouse/Props/S_WetFloorSign.usd",
           ]
         size: 50
         mode: "scene_instance"
 
     with.wet_floor_sign_instance:
       randomizer.scatter_2d:
+        seed: 1
         surface_prims: floor
         no_coll_prims: racks_and_walls
         check_for_collisions: True

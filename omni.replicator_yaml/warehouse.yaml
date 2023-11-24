@@ -73,17 +73,17 @@ with_trigger:
             upper: [0, -10, -60]
 
     # move the forklift around and rotate
-    with.forklift:
-      modify.pose:
-        rotation:
-          distribution.uniform:
-            lower: [0, 0, 0]
-            upper: [0, 0, 359]
-      # randomizer.scatter_2d:
-      #   seed: 0
-      #   surface_prims: floor
-      #   no_coll_prims: racks_and_walls
-      #   check_for_collisions: True
+    # with.forklift:
+    #   modify.pose:
+    #     rotation:
+    #       distribution.uniform:
+    #         lower: [0, 0, 0]
+    #         upper: [0, 0, 359]
+    #   randomizer.scatter_2d:
+    #     seed: 0
+    #     surface_prims: floor
+    #     no_coll_prims: racks_and_walls
+    #     check_for_collisions: True
 
     # create and scatter cones
     cone_instance:

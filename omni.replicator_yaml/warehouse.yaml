@@ -95,6 +95,11 @@ with_trigger:
         mode: "scene_instance"
 
     with.cone_instance:
+      modify.pose:
+        rotation:
+          distribution.uniform:
+            lower: [0, 0, 0]
+            upper: [0, 0, 359]
       randomizer.scatter_2d:
         seed: 1
         surface_prims: floor
@@ -110,6 +115,11 @@ with_trigger:
         mode: "scene_instance"
 
     with.wet_floor_sign_instance:
+      modify.pose:
+        rotation:
+          distribution.uniform:
+            lower: [0, 0, 0]
+            upper: [0, 0, 359]
       randomizer.scatter_2d:
         seed: 2
         surface_prims: floor

@@ -14,7 +14,7 @@ stage_up_axis_setting:
 # Create the camera and render product
 camera:
   create.camera:
-    position: [-10, -10, 3]
+    position: [0, 0, 0]
     rotation: [0, 0, 0]
 
 render_product:
@@ -30,7 +30,8 @@ warehouse:
 # Select the objects in the scene
 forklift:
   create.group:
-    items: ["/Root/forklift"]
+    items:
+      - "/Root/forklift"
 
 floor:
   get.prims:
@@ -89,9 +90,7 @@ with_trigger:
     cone_instance:
       randomizer.instantiate:
         paths:
-          [
-            "omniverse://localhost/NVIDIA/Assets/Isaac/2023.1.0/Isaac/Environments/Simple_Warehouse/Props/S_TrafficCone.usd",
-          ]
+          - "omniverse://localhost/NVIDIA/Assets/Isaac/2023.1.0/Isaac/Environments/Simple_Warehouse/Props/S_TrafficCone.usd"
         size: 100
         mode: "point_instance"
 
@@ -106,9 +105,7 @@ with_trigger:
     wet_floor_sign_instance:
       randomizer.instantiate:
         paths:
-          [
-            "omniverse://localhost/NVIDIA/Assets/Isaac/2023.1.0/Isaac/Environments/Simple_Warehouse/Props/S_WetFloorSign.usd",
-          ]
+          - "omniverse://localhost/NVIDIA/Assets/Isaac/2023.1.0/Isaac/Environments/Simple_Warehouse/Props/S_WetFloorSign.usd"
         size: 100
         mode: "scene_instance"
 

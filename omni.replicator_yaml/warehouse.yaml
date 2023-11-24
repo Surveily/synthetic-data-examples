@@ -22,16 +22,16 @@ render_product:
     camera: camera
     resolution: [1280, 720]
 
-# Load the scene
-warehouse:
+# Load the stage
+stage:
   create.from_usd:
     usd: "omniverse://localhost/NVIDIA/Assets/Isaac/2023.1.0/Isaac/Environments/Simple_Warehouse/full_warehouse.usd"
 
-# Select the objects in the scene
+# Select the objects in the stage
 forklift:
   create.group:
     items:
-      - "/Root/forklift"
+      - "/Replicator/Ref_Xform/Ref/forklift"
 
 floor:
   get.prims:
@@ -74,17 +74,17 @@ with_trigger:
             upper: [0, -10, -60]
 
     # move the forklift around and rotate
-    # with.forklift:
-    #   modify.pose:
-    #     rotation:
-    #       distribution.uniform:
-    #         lower: [0, 0, 0]
-    #         upper: [0, 0, 359]
-    #   randomizer.scatter_2d:
-    #     seed: 0
-    #     surface_prims: floor
-    #     no_coll_prims: racks_and_walls
-    #     check_for_collisions: True
+    with.forklift:
+      modify.pose:
+        rotation:
+          distribution.uniform:
+            lower: [0, 0, 0]
+            upper: [0, 0, 359]
+      randomizer.scatter_2d:
+        seed: 0
+        surface_prims: floor
+        no_coll_prims: racks_and_walls
+        check_for_collisions: True
 
     # create and scatter cones
     cone_instance:
@@ -92,7 +92,7 @@ with_trigger:
         paths:
           - "omniverse://localhost/NVIDIA/Assets/Isaac/2023.1.0/Isaac/Environments/Simple_Warehouse/Props/S_TrafficCone.usd"
         size: 100
-        mode: "point_instance"
+        mode: "scene_instance"
 
     with.cone_instance:
       randomizer.scatter_2d:

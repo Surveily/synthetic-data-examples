@@ -73,16 +73,17 @@ with_trigger:
             upper: [0, -10, -60]
 
     # move the forklift around and rotate
-    # with.forklift:
-    #   modify.pose:
-    #     rotation:
-    #       distribution.uniform:
-    #         lower: [0, 0, 0]
-    #         upper: [0, 0, 359]
-    #   randomizer.scatter_2d:
-    #     surface_prims: floor
-    #     no_coll_prims: racks_and_walls
-    #     check_for_collisions: True
+    with.forklift:
+      modify.pose:
+        rotation:
+          distribution.uniform:
+            lower: [0, 0, 0]
+            upper: [0, 0, 359]
+      # randomizer.scatter_2d:
+      #   seed: 0
+      #   surface_prims: floor
+      #   no_coll_prims: racks_and_walls
+      #   check_for_collisions: True
 
     # create and scatter cones
     cone_instance:
@@ -91,12 +92,12 @@ with_trigger:
           [
             "omniverse://localhost/NVIDIA/Assets/Isaac/2023.1.0/Isaac/Environments/Simple_Warehouse/Props/S_TrafficCone.usd",
           ]
-        size: 50
+        size: 100
         mode: "point_instance"
 
     with.cone_instance:
       randomizer.scatter_2d:
-        seed: 0
+        seed: 1
         surface_prims: floor
         no_coll_prims: racks_and_walls
         check_for_collisions: True
@@ -108,12 +109,12 @@ with_trigger:
           [
             "omniverse://localhost/NVIDIA/Assets/Isaac/2023.1.0/Isaac/Environments/Simple_Warehouse/Props/S_WetFloorSign.usd",
           ]
-        size: 50
+        size: 100
         mode: "scene_instance"
 
     with.wet_floor_sign_instance:
       randomizer.scatter_2d:
-        seed: 1
+        seed: 2
         surface_prims: floor
         no_coll_prims: racks_and_walls
         check_for_collisions: True

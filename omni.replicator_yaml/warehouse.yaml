@@ -46,6 +46,7 @@ writer:
   writers.get:
     name: "KittiWriter"
     init_params:
+      semantic_filter_predicate: "class:sign|cone"
       output_dir: "/workspaces/synthetic-data-examples/.out/Warehouse"
 
 writer_attach:

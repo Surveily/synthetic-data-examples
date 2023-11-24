@@ -3,11 +3,11 @@
         {
             "type": "bashdb",
             "request": "launch",
-            "name": "tutorial_basic_functionality",
+            "name": "warehouse",
             "cwd": "${workspaceFolder}",
             "program": "run.sh",
             "args": [
-                "tutorial_basic_functionality"
+                "warehouse"
             ]
         }
     ]

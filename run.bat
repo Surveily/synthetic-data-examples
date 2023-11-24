@@ -1,2 +1,2 @@
 # run.bat tutorial_basic_functionality
-%LOCALAPPDATA%\ov\pkg\isaac_sim-2023.1.0-hotfix.1\\isaac-sim.headless.native.bat --no-window --/omni/replicator/replicatorYaml/yamlPath=C:\Users\WojciechTurowicz\Workspace\synthetic-data-examples\omni.replicator_yaml\%1.yaml
+%LOCALAPPDATA%\ov\pkg\isaac_sim-2023.1.0-hotfix.1\\isaac-sim.headless.native.bat --no-window --/omni/replicator/replicatorYaml/yamlPath=%UserProfile%\Workspace\synthetic-data-examples\omni.replicator_yaml\%1.yaml

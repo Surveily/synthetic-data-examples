@@ -77,13 +77,13 @@ trigger:
 # When the trigger executes, run the following logic
 with_trigger:
   with.trigger:
+    # move the camera around and rotate
     with.camera:
-      # move the camera around and rotate
       modify.pose:
         position:
           distribution.uniform:
             lower: [-23.6, -3, 2.5]
-            upper: [3.03, 3, 5.0]
+            upper: [3.03, 3, 7.5]
         rotation:
           distribution.uniform:
             lower: [0, -30, -120]

@@ -72,7 +72,7 @@ register_shape_textures:
 trigger:
   trigger.on_frame:
     max_execs: 50
-    rt_subframes: 5
+    rt_subframes: 3
 
 # When the trigger executes, run the following logic
 with_trigger:
@@ -128,7 +128,7 @@ with_trigger:
         paths:
           - omniverse://localhost/Library/trolley1-fbx.usd
         size: 50
-        mode: scene_instance
+        use_cache: False
 
     trolley_wall:
       get.prims:
@@ -138,80 +138,42 @@ with_trigger:
       get.prims:
         semantics: [[class, cagefloor]]
 
+    with.trolley_wall:
+      randomizer.color:
+        colors:
+          - [120, 120, 120]
+          - [111, 111, 111]
+          - [92, 92, 92]
+          - [69, 69, 69]
+          - [28, 28, 28]
+          - [47, 79, 79]
+          - [155, 155, 104]
+          - [155, 155, 53]
+          - [155, 155, 2]
+          - [155, 155, 0]
+          - [104, 104, 0]
+          - [53, 53, 0]
+
+    with.trolley_floor:
+      randomizer.materials:
+        materials:
+          - /Replicator/Ref_Xform/Ref/Looks/Gold_Scratched
+          - /Replicator/Ref_Xform/Ref/Looks/Aluminum_Scratched
+          - /Replicator/Ref_Xform/Ref/Looks/Stainless_Steel_Milled
+
     with.trolley_instance:
-      modify.semantics:
-        semantics: [[class, cagetrolley]]
-      modify.pose:
-        rotation:
-          distribution.uniform:
-            lower: [0, 0, 0]
-            upper: [0, 0, 359]
+      # modify.semantics:
+      #   semantics: [[class, cagetrolley]]
+      # modify.pose:
+      #   rotation:
+      #     distribution.uniform:
+      #       lower: [0, 0, 0]
+      #       upper: [0, 0, 359]
       randomizer.scatter_2d:
         seed: 2
         surface_prims: floor
         no_coll_prims: racks_and_walls
         check_for_collisions: True
-      # randomizer.color:
-      #   colors:
-      #     - [120, 120, 120]
-      #     - [111, 111, 111]
-      #     - [92, 92, 92]
-      #     - [69, 69, 69]
-
-    with.trolley_wall:
-    #   randomizer.materials:
-    #     materials:
-    #       - /Replicator/Ref_Xform/Ref/Looks/Gold_Scratched
-    #       - /Replicator/Ref_Xform/Ref/Looks/Aluminum_Scratched
-    #       - /Replicator/Ref_Xform/Ref/Looks/Stainless_Steel_Milled
-      randomizer.color:
-        colors:
-          - [220, 220, 220]
-          - [211, 211, 211]
-          - [192, 192, 192]
-          - [169, 169, 169]
-          - [128, 128, 128]
-          - [105, 105, 105]
-          - [119, 136, 153]
-          - [112, 128, 144]
-          - [47, 79, 79]
-          - [255, 255, 204]
-          - [255, 255, 153]
-          - [255, 255, 102]
-          - [255, 255, 51]
-          - [255, 255, 0]
-          - [204, 204, 0]
-          - [153, 153, 0]
-          - [102, 102, 0]
-          - [51, 51, 0]
-
-    with.trolley_floor:
-      randomizer.materials:
-        materials:
-          - /Replicator/Ref_Xform/Ref/SM_floor27/Looks/MI_Floor_02b
-          - /Replicator/Ref_Xform/Ref/Looks/Concrete_Floor_Damage
-          - /Replicator/Ref_Xform/Ref/Looks/Concrete_Polished
-          - /Replicator/Ref_Xform/Ref/Looks/Concrete_Precast
-    #   randomizer.color:
-    #     colors:
-    #       - [220, 220, 220]
-    #       - [211, 211, 211]
-    #       - [192, 192, 192]
-    #       - [169, 169, 169]
-    #       - [128, 128, 128]
-    #       - [105, 105, 105]
-    #       - [119, 136, 153]
-    #       - [112, 128, 144]
-    #       - [47, 79, 79]
-    #       - [255, 255, 204]
-    #       - [255, 255, 153]
-    #       - [255, 255, 102]
-    #       - [255, 255, 51]
-    #       - [255, 255, 0]
-    #       - [204, 204, 0]
-    #       - [153, 153, 0]
-    #       - [102, 102, 0]
-    #       - [51, 51, 0]
 
     # create and scatter wet floor signs
     wet_floor_sign_instance:

@@ -71,7 +71,7 @@ register_shape_textures:
 # Set the trigger as on_frame
 trigger:
   trigger.on_frame:
-    max_execs: 50
+    max_execs: 10
     rt_subframes: 3
 
 # When the trigger executes, run the following logic
@@ -141,18 +141,10 @@ with_trigger:
     with.trolley_wall:
       randomizer.color:
         colors:
-          - [120, 120, 120]
-          - [111, 111, 111]
-          - [92, 92, 92]
-          - [69, 69, 69]
-          - [28, 28, 28]
-          - [47, 79, 79]
-          - [155, 155, 104]
-          - [155, 155, 53]
-          - [155, 155, 2]
-          - [155, 155, 0]
-          - [104, 104, 0]
-          - [53, 53, 0]
+          - [20, 20, 0]
+          #- [111, 111, 111]
+          #- [155, 155, 104]
+          #- [155, 155, 53]
 
     with.trolley_floor:
       randomizer.materials:

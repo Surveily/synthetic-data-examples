@@ -122,6 +122,26 @@ with_trigger:
         no_coll_prims: racks_and_walls
         check_for_collisions: True
 
+    # create and scatter wet floor signs
+    wet_floor_sign_instance:
+      randomizer.instantiate:
+        paths:
+          - omniverse://localhost/NVIDIA/Assets/Isaac/2023.1.0/Isaac/Environments/Simple_Warehouse/Props/S_WetFloorSign.usd
+        size: 50
+        mode: scene_instance
+
+    with.wet_floor_sign_instance:
+      modify.pose:
+        rotation:
+          distribution.uniform:
+            lower: [0, 0, 0]
+            upper: [0, 0, 359]
+      randomizer.scatter_2d:
+        seed: 3
+        surface_prims: floor
+        no_coll_prims: racks_and_walls
+        check_for_collisions: True
+
     # create and scatter cage trolleys
     trolley_instance:
       randomizer.instantiate:
@@ -141,7 +161,7 @@ with_trigger:
     with.trolley_wall:
       randomizer.color:
         colors:
-          - [20, 20, 0]
+          - [5, 5, 0]
           #- [111, 111, 111]
           #- [155, 155, 104]
           #- [155, 155, 53]
@@ -167,26 +187,7 @@ with_trigger:
         no_coll_prims: racks_and_walls
         check_for_collisions: True
 
-    # create and scatter wet floor signs
-    wet_floor_sign_instance:
-      randomizer.instantiate:
-        paths:
-          - omniverse://localhost/NVIDIA/Assets/Isaac/2023.1.0/Isaac/Environments/Simple_Warehouse/Props/S_WetFloorSign.usd
-        size: 50
-        mode: scene_instance
-
-    with.wet_floor_sign_instance:
-      modify.pose:
-        rotation:
-          distribution.uniform:
-            lower: [0, 0, 0]
-            upper: [0, 0, 359]
-      randomizer.scatter_2d:
-        seed: 3
-        surface_prims: floor
-        no_coll_prims: racks_and_walls
-        check_for_collisions: True
-
+    # Randomize floor
     with.floor:
       modify.material:
         value:

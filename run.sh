@@ -1,7 +1,9 @@
 #!/bin/bash
 # ./run.sh tutorial_basic_functionality
 
-FILE=/workspaces/synthetic-data-examples/omni.replicator_yaml/$1.yaml
+FILE=$(pwd)/omni.replicator_yaml/$1.yaml
+
+echo $FILE
 
 if [ -f "$FILE" ]; then
     /isaac-sim/runheadless.native.sh  --no-window \

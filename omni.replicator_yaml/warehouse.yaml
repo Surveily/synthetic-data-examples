@@ -145,12 +145,20 @@ with_trigger:
         semantics: [[class, cagefloor]]
 
     with.trolley_wall:
-      randomizer.color:
-        colors:
-          - [5, 5, 0]
-          #- [111, 111, 111]
-          #- [155, 155, 104]
-          #- [155, 155, 53]
+      randomizer.materials:
+        materials:
+          - /Replicator/Ref_Xform/Ref/Looks/Painted_Metal_Yellow_A
+          - /Replicator/Ref_Xform/Ref/Looks/Painted_Metal_Yellow_Glossy_A
+          - /Replicator/Ref_Xform/Ref/Looks/Painted_Metal_Grey_Glossy_A
+          - /Replicator/Ref_Xform/Ref/Looks/Painted_Metal_Orange_A
+          - /Replicator/Ref_Xform/Ref/Looks/Painted_Metal_Red_A
+          # - /Replicator/Ref_Xform/Ref/Looks/Powdercoat_A
+      # randomizer.color:
+      #   colors:
+      #     - [5, 5, 0]
+      #     - [111, 111, 111]
+      #     - [155, 155, 104]
+      #     - [155, 155, 53]
 
     with.trolley_floor:
       randomizer.materials:
@@ -160,8 +168,8 @@ with_trigger:
           - /Replicator/Ref_Xform/Ref/Looks/Stainless_Steel_Milled
 
     with.trolley_instance:
-      modify.semantics:
-        semantics: [[class, cagetrolley]]
+      # modify.semantics:
+      #   semantics: [[class, cagetrolley]]
       modify.pose:
         rotation:
           distribution.uniform:

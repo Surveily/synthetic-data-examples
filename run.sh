@@ -5,6 +5,8 @@ FILE=/workspaces/synthetic-data-examples/omni.replicator_yaml/$1.yaml
 
 if [ -f "$FILE" ]; then
     /isaac-sim/runheadless.native.sh  --no-window \
+                                      --/app/viewport/grid/enabled=false \
+                                      --/app/viewport/defaults/guide/grid/visible=false \
                                       --/omni/replicator/replicatorYaml/yamlPath=$FILE
     exit $?
 else

@@ -9,6 +9,16 @@
             "args": [
                 "warehouse"
             ]
+        },
+        {
+            "type": "bashdb",
+            "request": "launch",
+            "name": "client",
+            "cwd": "${workspaceFolder}",
+            "program": "run.sh",
+            "args": [
+                "client"
+            ]
         }
     ]
 }

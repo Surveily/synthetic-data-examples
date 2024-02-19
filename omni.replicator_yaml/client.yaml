@@ -1,0 +1,139 @@
+# Default scene settings. This script default is 1 (IsaacSim), so if you change
+# the meters per unit or up axis, you need to alter the coordinates and rotations.
+
+# IsaacSim default is 1, Code is 0.01
+stage_unit_setting:
+  settings.set_stage_meters_per_unit:
+    meters_per_unit: 1
+
+# IsaacSim default is "Z"", Code is "Y"
+stage_up_axis_setting:
+  settings.set_stage_up_axis:
+    up_axis: Z
+
+# Load the stage
+stage:
+  create.from_usd:
+    usd: omniverse://localhost/Library/client.usd
+
+# Select the objects in the stage
+floor:
+  get.prims:
+    semantics: [[class, floor]]
+
+ground:
+  create.group:
+    items:
+      - /Replicator/Ref_Xform/Ref/Xform/ground
+
+cube:
+  create.group:
+    items:
+      - /Replicator/Ref_Xform/Ref/Xform/Cube
+
+camera:
+  create.group:
+    items:
+      - /Replicator/Ref_Xform/Ref/Xform/Camera
+
+render_product:
+  create.render_product:
+    camera: camera
+    resolution: [2560, 1440]
+
+# Create lights
+# light:
+#   create.light:
+#     position: [1,1,1]
+
+# Create the writer and initialize
+writer:
+  writers.get:
+    name: KittiWriter
+    init_params:
+      semantic_filter_predicate: class:person
+      output_dir: /workspaces/synthetic-data-examples/.out/Client
+    # name: BasicWriter
+    # init_params:
+    #   semantic_filter_predicate: class:person
+    #   rgb: true
+    #   bounding_box_2d_tight: true
+    #   output_dir: /workspaces/synthetic-data-examples/.out/Client
+
+writer_attach:
+  writer.attach:
+    render_products: render_product
+
+# Set the trigger as on_frame
+trigger:
+  trigger.on_frame:
+    max_execs: 20
+    rt_subframes: 5
+
+# When the trigger executes, run the following logic
+with_trigger:
+  with.trigger:
+
+    # Hide ground
+    with.ground:
+      modify.visibility:
+        value: False
+
+    # Create and scatter people
+    person_instance:
+      randomizer.instantiate:
+        paths:
+          - omniverse://localhost/NVIDIA/Assets/Characters/Reallusion/Worker/Props/Worker.usd
+          - omniverse://localhost/NVIDIA/Assets/Characters/Reallusion/Worker/Props/Worker.Kitchen_CleanTable_M.usd
+          - omniverse://localhost/NVIDIA/Assets/Characters/Reallusion/Worker/Props/Worker.Market_Sales_Assisting_M.usd
+          - omniverse://localhost/NVIDIA/Assets/Characters/Reallusion/Worker/Props/Worker.Market_Sales_SortOut_M.usd
+          - omniverse://localhost/NVIDIA/Assets/Characters/Reallusion/Worker/Props/Worker.StandingDiscussion_LookingDown_M.usd
+          - omniverse://localhost/NVIDIA/Assets/Characters/Reallusion/Worker/Props/Worker.TrafficGuard_M.usd
+          - omniverse://localhost/NVIDIA/Assets/Characters/Reallusion/Worker/Props/Worker.Worker_Idle_Pose.usd
+        size:
+          distribution.uniform:
+            lower: [1]
+            upper: [25]
+        use_cache: False
+
+    with.person_instance:
+      modify.pose:
+        scale: 0.1
+        rotation:
+          distribution.uniform:
+            lower: [0, 0, 0]
+            upper: [0, 0, 359]
+      modify.semantics:
+        semantics: [[class, person]]
+      randomizer.scatter_2d:
+        seed: 0
+        surface_prims: floor
+        check_for_collisions: True
+
+    # Change clothes colours
+    jacket:
+      get.prims:
+        path_pattern: Field_Jacket\/Field_Jacket\/Field_Jacket
+
+    clothes:
+      get.material:
+        path_pattern: Looks\/Clothes
+
+    with.jacket:
+      randomizer.materials:
+        materials: clothes
+
+    # Randomize background texture
+    with.cube:
+      randomizer.texture:
+        textures:
+          - omniverse://localhost/Library/CRH/Backgrounds/cam6/cam6_10.48.190.166_554_20240205_132913-00.01.56.594.jpeg
+          - omniverse://localhost/Library/CRH/Backgrounds/cam6/cam6_10.48.190.166_554_20240206_074317-00.04.00.405.jpeg
+          - omniverse://localhost/Library/CRH/Backgrounds/cam6/CRH NVR11_ch29_20240108064113_20240108072806-00.01.44.687.jpeg
+          - omniverse://localhost/Library/CRH/Backgrounds/cam6/CRH NVR11_ch29_20240108064113_20240108072806-00.26.35.407.jpeg
+          - omniverse://localhost/Library/CRH/Backgrounds/cam6/CRH NVR11_ch29_20240108064113_20240108072806-00.44.06.425.jpeg
+          - omniverse://localhost/Library/CRH/Backgrounds/cam6/CRH NVR11_ch29_20240117124752_20240117134752-00.00.00.000.jpeg
+          - omniverse://localhost/Library/CRH/Backgrounds/cam6/CRH NVR11_ch29_20240117124752_20240117134752-00.43.49.228.jpeg
+          - omniverse://localhost/Library/CRH/Backgrounds/cam6/CRH NVR11_ch29_20240201142421_20240201151119-00.08.55.831.jpeg
+          - omniverse://localhost/Library/CRH/Backgrounds/cam6/CRH NVR11_ch29_20240201142421_20240201151119-00.38.38.710.jpeg
+          - omniverse://localhost/Library/CRH/Backgrounds/cam6/CRH NVR11_ch29_20240201142421_20240201151119-00.42.59.721.jpeg

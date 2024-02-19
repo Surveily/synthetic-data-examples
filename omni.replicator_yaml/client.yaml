@@ -12,9 +12,14 @@ stage_up_axis_setting:
     up_axis: Z
 
 # Load the stage
-stage:
+load_stage:
   create.from_usd:
     usd: omniverse://localhost/Library/client.usd
+
+# Load the animations
+load_animations:
+  create.from_dir:
+    dir_path: omniverse://localhost/NVIDIA/Assets/Characters/Reallusion/Worker/Motions
 
 # Select the objects in the stage
 floor:
@@ -36,29 +41,22 @@ camera:
     items:
       - /Replicator/Ref_Xform/Ref/Xform/Camera
 
+animations:
+  get.skelanimation:
+    path_pattern: Ref\/Animation
+
+# Create output
 render_product:
   create.render_product:
     camera: camera
     resolution: [2560, 1440]
 
-# Create lights
-# light:
-#   create.light:
-#     position: [1,1,1]
-
-# Create the writer and initialize
 writer:
   writers.get:
     name: KittiWriter
     init_params:
       semantic_filter_predicate: class:person
       output_dir: /workspaces/synthetic-data-examples/.out/Client
-    # name: BasicWriter
-    # init_params:
-    #   semantic_filter_predicate: class:person
-    #   rgb: true
-    #   bounding_box_2d_tight: true
-    #   output_dir: /workspaces/synthetic-data-examples/.out/Client
 
 writer_attach:
   writer.attach:
@@ -83,17 +81,11 @@ with_trigger:
     person_instance:
       randomizer.instantiate:
         paths:
-          - omniverse://localhost/NVIDIA/Assets/Characters/Reallusion/Worker/Props/Worker.usd
-          - omniverse://localhost/NVIDIA/Assets/Characters/Reallusion/Worker/Props/Worker.Kitchen_CleanTable_M.usd
-          - omniverse://localhost/NVIDIA/Assets/Characters/Reallusion/Worker/Props/Worker.Market_Sales_Assisting_M.usd
-          - omniverse://localhost/NVIDIA/Assets/Characters/Reallusion/Worker/Props/Worker.Market_Sales_SortOut_M.usd
-          - omniverse://localhost/NVIDIA/Assets/Characters/Reallusion/Worker/Props/Worker.StandingDiscussion_LookingDown_M.usd
-          - omniverse://localhost/NVIDIA/Assets/Characters/Reallusion/Worker/Props/Worker.TrafficGuard_M.usd
           - omniverse://localhost/NVIDIA/Assets/Characters/Reallusion/Worker/Props/Worker.Worker_Idle_Pose.usd
-        size:
-          distribution.uniform:
-            lower: [1]
-            upper: [25]
+        size: 15
+          # distribution.uniform:
+          #   lower: [1]
+          #   upper: [25]
         use_cache: False
 
     with.person_instance:
@@ -105,20 +97,36 @@ with_trigger:
             upper: [0, 0, 359]
       modify.semantics:
         semantics: [[class, person]]
+      modify.animation:
+        values: 
+          distribution.sequence:
+            items: animations
       randomizer.scatter_2d:
         seed: 0
         surface_prims: floor
         check_for_collisions: True
 
     # Change clothes colours
-    jacket:
-      get.prims:
-        path_pattern: Field_Jacket\/Field_Jacket\/Field_Jacket
-
     clothes:
       get.material:
         path_pattern: Looks\/Clothes
 
+    cap:
+      get.prims:
+        path_pattern: Baseball_cap\/Baseball_Cap\/Baseball_Cap
+    pants:
+      get.prims:
+        path_pattern: Cargo_pant\/Cargo_pant\/Cargo_pant
+    jacket:
+      get.prims:
+        path_pattern: Field_Jacket\/Field_Jacket\/Field_Jacket
+
+    with.cap:
+      randomizer.materials:
+        materials: clothes
+    with.pants:
+      randomizer.materials:
+        materials: clothes
     with.jacket:
       randomizer.materials:
         materials: clothes

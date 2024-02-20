@@ -11,6 +11,16 @@ stage_up_axis_setting:
   settings.set_stage_up_axis:
     up_axis: Z
 
+# Enable Path Tracing
+path_tracing:
+  settings.set_render_pathtraced:
+    samples_per_pixel: 64
+
+path_tracing_clamp:
+  settings.carb_settings:
+    setting: /rtx/pathtracing/clampSpp
+    value: 0
+
 # Load the stage
 load_stage:
   create.from_usd:
@@ -26,9 +36,10 @@ floor:
   get.prims:
     semantics: [[class, floor]]
 
-ground:
+temp:
   create.group:
     items:
+      - /Environment/defaultLight
       - /Replicator/Ref_Xform/Ref/Xform/ground
 
 cube:
@@ -65,15 +76,15 @@ writer_attach:
 # Set the trigger as on_frame
 trigger:
   trigger.on_frame:
-    max_execs: 20
-    rt_subframes: 5
+    max_execs: 10
+    #rt_subframes: 10
 
 # When the trigger executes, run the following logic
 with_trigger:
   with.trigger:
 
-    # Hide ground
-    with.ground:
+    # Hide ground and default light
+    with.temp:
       modify.visibility:
         value: False
 

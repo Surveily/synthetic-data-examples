@@ -42,6 +42,11 @@ stage_up_axis_setting:
   settings.set_stage_up_axis:
     up_axis: "Z"
 
+# Enable Path Tracing
+path_tracing:
+  settings.set_render_pathtraced:
+    samples_per_pixel: 128
+
 # This YAML script example demonstrates:
 # Randomizing the textures on materials of prims in the scene
 
@@ -107,8 +112,8 @@ register_shape_textures:
 # higher quality render
 trigger:
   trigger.on_frame:
-    max_execs: 20
-    rt_subframes: 3
+    max_execs: 10
+    rt_subframes: 10
 
 # When the trigger executes, apply the randomizer
 with_trigger:

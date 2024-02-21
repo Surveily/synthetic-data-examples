@@ -14,7 +14,7 @@ stage_up_axis_setting:
 # Enable Path Tracing
 path_tracing:
   settings.set_render_pathtraced:
-    samples_per_pixel: 64
+    samples_per_pixel: 128
 
 path_tracing_clamp:
   settings.carb_settings:
@@ -76,8 +76,8 @@ writer_attach:
 # Set the trigger as on_frame
 trigger:
   trigger.on_frame:
-    max_execs: 10
-    #rt_subframes: 10
+    max_execs: 50
+    rt_subframes: 20
 
 # When the trigger executes, run the following logic
 with_trigger:

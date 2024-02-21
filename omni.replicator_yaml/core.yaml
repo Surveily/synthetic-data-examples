@@ -1,0 +1,156 @@
+# Default scene settings. This script default is 1 (IsaacSim), so if you change
+# the meters per unit or up axis, you need to alter the coordinates and rotations.
+
+# IsaacSim default is 1, Code is 0.01
+stage_unit_setting:
+  settings.set_stage_meters_per_unit:
+    meters_per_unit: 1
+
+# IsaacSim default is "Z"", Code is "Y"
+stage_up_axis_setting:
+  settings.set_stage_up_axis:
+    up_axis: Z
+
+# Enable Path Tracing
+path_tracing:
+  settings.set_render_pathtraced:
+    samples_per_pixel: 32
+
+path_tracing_clamp:
+  settings.carb_settings:
+    setting: /rtx/pathtracing/clampSpp
+    value: 0
+
+# Load the stage
+load_stage:
+  create.from_usd:
+    usd: omniverse://localhost/Library/CRH/cam6.usd
+
+# Load the animations
+load_animations:
+  create.from_dir:
+    recursive: True
+    dir_path: omniverse://localhost/Library/ActorCore/Actorcore-Omniverse-0221-130452/Motion/
+
+# Select the objects in the stage
+floor:
+  get.prims:
+    semantics: [[class, floor]]
+
+temp:
+  create.group:
+    items:
+      - /Environment/defaultLight
+
+camera:
+  create.group:
+    items:
+      - /Replicator/Ref_Xform/Ref/Xform/Camera
+
+animations:
+  get.skelanimation:
+    path_pattern: \/Ref
+
+# Create output
+render_product:
+  create.render_product:
+    camera: camera
+    resolution: [2560, 1440]
+
+writer:
+  writers.get:
+    name: KittiWriter
+    init_params:
+      semantic_filter_predicate: class:person
+      output_dir: /workspaces/synthetic-data-examples/.out/Client
+
+writer_attach:
+  writer.attach:
+    render_products: render_product
+
+# Set the trigger as on_frame
+trigger:
+  trigger.on_frame:
+    interval: 2
+    max_execs: 25
+
+# When the trigger executes, run the following logic
+with_trigger:
+  with.trigger:
+
+    # # Hide ground and default light
+    # with.temp:
+    #   modify.visibility:
+    #     value: False
+
+    # Set background
+    background:
+      settings.carb_settings:
+        setting: /rtx/post/backgroundZeroAlpha/backplateTexture
+        value: 
+          distribution.sequence:
+            items: 
+              - "omniverse://localhost/Library/CRH/Backgrounds/cam6/cam6_10.48.190.166_554_20240205_132913-00.01.56.594.jpeg"
+              - "omniverse://localhost/Library/CRH/Backgrounds/cam6/cam6_10.48.190.166_554_20240206_074317-00.04.00.405.jpeg"
+              - "omniverse://localhost/Library/CRH/Backgrounds/cam6/CRH NVR11_ch29_20240108064113_20240108072806-00.01.44.687.jpeg"
+              - "omniverse://localhost/Library/CRH/Backgrounds/cam6/CRH NVR11_ch29_20240108064113_20240108072806-00.26.35.407.jpeg"
+              - "omniverse://localhost/Library/CRH/Backgrounds/cam6/CRH NVR11_ch29_20240108064113_20240108072806-00.44.06.425.jpeg"
+              - "omniverse://localhost/Library/CRH/Backgrounds/cam6/CRH NVR11_ch29_20240117124752_20240117134752-00.00.00.000.jpeg"
+              - "omniverse://localhost/Library/CRH/Backgrounds/cam6/CRH NVR11_ch29_20240117124752_20240117134752-00.43.49.228.jpeg"
+              - "omniverse://localhost/Library/CRH/Backgrounds/cam6/CRH NVR11_ch29_20240201142421_20240201151119-00.08.55.831.jpeg"
+              - "omniverse://localhost/Library/CRH/Backgrounds/cam6/CRH NVR11_ch29_20240201142421_20240201151119-00.38.38.710.jpeg"
+              - "omniverse://localhost/Library/CRH/Backgrounds/cam6/CRH NVR11_ch29_20240201142421_20240201151119-00.42.59.721.jpeg"
+
+    # Create and scatter people
+    person_instance:
+      randomizer.instantiate:
+        paths:
+          - omniverse://localhost/Library/ActorCore/Actorcore-Omniverse-0221-130452/Actor/uniform-m-0024/uniform-m-0024.usd
+        size: 15
+          # distribution.uniform:
+          #   lower: [1]
+          #   upper: [25]
+        use_cache: False
+
+    with.person_instance:
+      modify.pose:
+        scale: 0.1
+        rotation:
+          distribution.uniform:
+            lower: [0, 0, 0]
+            upper: [0, 0, 359]
+      modify.semantics:
+        semantics: [[class, person]]
+      modify.animation:
+        values: 
+          distribution.sequence:
+            items: animations
+      randomizer.scatter_2d:
+        seed: 0
+        surface_prims: floor
+        check_for_collisions: True
+
+    # # Change clothes colours
+    # clothes:
+    #   get.material:
+    #     path_pattern: Looks\/Clothes
+
+    # cap:
+    #   get.prims:
+    #     path_pattern: Baseball_cap\/Baseball_Cap\/Baseball_Cap
+    # pants:
+    #   get.prims:
+    #     path_pattern: Cargo_pant\/Cargo_pant\/Cargo_pant
+    # jacket:
+    #   get.prims:
+    #     path_pattern: Field_Jacket\/Field_Jacket\/Field_Jacket
+
+    # with.cap:
+    #   randomizer.materials:
+    #     materials: clothes
+    # with.pants:
+    #   randomizer.materials:
+    #     materials: clothes
+    # with.jacket:
+    #   randomizer.materials:
+    #     materials: clothes

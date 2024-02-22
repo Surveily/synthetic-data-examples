@@ -37,7 +37,7 @@ floor:
   get.prims:
     semantics: [[class, floor]]
 
-temp:
+light:
   create.group:
     items:
       - /Environment/defaultLight
@@ -55,7 +55,7 @@ animations:
 render_product:
   create.render_product:
     camera: camera
-    resolution: [2560, 1440]
+    resolution: [1280, 720]
 
 writer:
   writers.get:
@@ -78,10 +78,20 @@ trigger:
 with_trigger:
   with.trigger:
 
-    # # Hide ground and default light
-    # with.temp:
-    #   modify.visibility:
-    #     value: False
+    # Randomize sun
+    with.light:
+      modify.attribute:
+        name: angle
+        value:
+          distribution.uniform:
+            lower: -5
+            upper: 0.53
+      modify.pose:
+        rotation:
+          distribution.uniform:
+            lower: [0, 0, 0]
+            upper: [0, 359, 0]
+
 
     # Set background
     background:

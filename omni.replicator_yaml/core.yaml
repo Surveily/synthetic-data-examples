@@ -55,7 +55,7 @@ animations:
 render_product:
   create.render_product:
     camera: camera
-    resolution: [2560, 1440]
+    resolution: [1280, 720]
 
 writer:
   writers.get:

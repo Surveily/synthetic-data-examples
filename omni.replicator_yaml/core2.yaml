@@ -72,7 +72,7 @@ writer_attach:
 trigger:
   trigger.on_frame:
     interval: 2
-    max_execs: 25
+    max_execs: 20
     #rt_subframes: 10
 
 # When the trigger executes, run the following logic
@@ -92,7 +92,6 @@ with_trigger:
           distribution.uniform:
             lower: [0, 0, 0]
             upper: [0, 45, 359]
-
 
     # Set background
     background:

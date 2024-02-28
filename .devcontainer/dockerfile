@@ -5,3 +5,7 @@ RUN apt update && apt install git vim -y
 
 # Remove ROS/2 Bridge
 RUN sed -i 's/ros_bridge_extension = "omni.isaac.ros2_bridge"/ros_bridge_extension = ""/g' /isaac-sim/apps/omni.isaac.sim.base.kit
+
+# Toggle Grid Off
+RUN sed -i '17i import omni.kit.viewport' /isaac-sim/extscache/omni.replicator.replicator_yaml-2.0.4+lx64/omni/replicator/replicator_yaml/scripts/replicator_yaml_extension.py
+RUN sed -i '100i \ \ \ \ \ \ \ \ omni.kit.viewport.actions.actions.toggle_global_visibility(visible=False)' /isaac-sim/extscache/omni.replicator.replicator_yaml-2.0.4+lx64/omni/replicator/replicator_yaml/scripts/replicator_yaml_extension.py
